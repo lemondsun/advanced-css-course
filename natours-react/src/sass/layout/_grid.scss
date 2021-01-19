@@ -1,0 +1,55 @@
+.row {
+  max-width: $grid-width;
+  margin: 0 auto;
+ 
+  // selects everything but the last child
+  // for this example the last child is the last row.
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+  }
+// clearfixs' are neccesary to use floats like we do below.
+// it fills the element with empty content
+// this is to prevent the floated element from collapsing onto other elements
+  @include clearfix;
+
+  // brackets are used as selectors for elements
+  // they can select things like src or alt or class etc.
+  // in this example we selected class that start with col-
+  // ^ simbol selects elements that start with...
+  [class^="col-"] {
+      float: left;
+      
+      &:not(:last-child) {
+        margin-right: $gutter-horizontal;
+      }
+  }
+
+  .col-1-of-2 {
+    // the calc allows for calculations in css to find measurments
+    // below we have the width of the entire screen 100%
+    // minus the space between the columns (the gutter)
+    // divided by 2, the amount of columns in the row.
+      width: calc((100% - #{$gutter-horizontal})/2);
+  }
+
+  .col-1-of-3 {
+    width: calc((100% - 2 * #{$gutter-horizontal}) /3);
+  }
+
+  .col-2-of-3 {
+    width: calc(2 *((100% - 2 * #{$gutter-horizontal}) /3) + #{$gutter-horizontal});
+  }
+
+  .col-1-of-4 {
+    width: calc((100% - 3 * #{$gutter-horizontal}) /4 );
+  }
+
+  .col-2-of-4 {
+    width: calc(2* ((100% - 3 * #{$gutter-horizontal}) /4) + #{$gutter-horizontal} );
+  }
+
+  .col-3-of-4 {
+    width: calc(3* ((100% - 3 * #{$gutter-horizontal}) /4) + 2 * #{$gutter-horizontal} );
+  }
+}
+
